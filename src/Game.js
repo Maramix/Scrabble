@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import allLetters from "./Data/letterdb";
 
-const Game = () => {
+const Game = ({ origin, selectOrigin }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [availableLetters, setAvailableLetters] = useState(allLetters());
   const [playerOneLetters, setPlayerOneLetters] = useState([]);
@@ -49,7 +49,10 @@ const Game = () => {
       nextGameState.isPlayerOneTurn = false;
     }
     setGameState(nextGameState);
+    selectOrigin(0, 0);
   };
+
+  console.log(origin);
 
   if (isLoading)
     return (
@@ -62,6 +65,8 @@ const Game = () => {
     return (
       <div className="player">
         <p>Round: {gameState.round}</p>
+        {origin.x === 0 && <p> Select origin</p>}
+        <br />
         <div className="board-row">
           <h1>Player One:</h1>
           <span>
@@ -87,13 +92,19 @@ const Game = () => {
     return (
       <div className="player">
         <p>Round: {gameState.round}</p>
+        {origin.x === 0 && <p> Select origin</p>}
+        <br />
         <div className="board-row">
           <h1>Player Two:</h1>
           <span>
             {playerTwoLetters.map((tile, index) => (
-              <p key={index} className="tile">
+              <button
+                onClick={() => console.log("elo")}
+                key={index}
+                className="tile"
+              >
                 {tile.letter}
-              </p>
+              </button>
             ))}
             <p>Score: {gameState.scorePlayerOne}</p>
           </span>

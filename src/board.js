@@ -1,12 +1,12 @@
 import { useState } from "react";
 import "./App.css";
 
-const Board = () => {
+const Board = ({ selectOrigin }) => {
   const boardCoordinates = [
     ["TWS", "", "", "DLS", "", "", "", "TWS", "", "", "", "DLS", "", "", "TWS"],
     ["", "DWS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "DWS", ""],
-    ["DLS", "", "", "DWS", "", "", "", "DLS", "", "", "", "DWS", "", "", "DLS"],
     ["", "", "DWS", "", "", "", "DLS", "", "DLS", "", "", "", "DWS", "", ""],
+    ["DLS", "", "", "DWS", "", "", "", "DLS", "", "", "", "DWS", "", "", "DLS"],
     ["", "", "", "", "DWS", "", "", "", "", "", "DWS", "", "", "", ""],
     ["", "TLS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "TLS", ""],
     ["", "", "DLS", "", "", "", "DLS", "", "DLS", "", "", "", "DLS", "", ""],
@@ -66,13 +66,14 @@ const Board = () => {
         {boardCellsState.map((row, index) => (
           <div key={index}>
             {row.map((cell, index2) => (
-              <p
+              <button
+                onClick={() => selectOrigin(cell.x, cell.y)}
                 key={index2}
                 style={{ backgroundColor: cell.color }}
                 className="cell"
               >
                 {cell.value}
-              </p>
+              </button>
             ))}
             {index % 15 === 0 && <br />}
           </div>

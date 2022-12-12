@@ -26,7 +26,7 @@ const allLeters = () => {
     { letter: "x", points: 8, quantity: 1 },
     { letter: "y", points: 4, quantity: 2 },
     { letter: "z", points: 10, quantity: 1 },
-    { letter: "blank", points: 0, quantity: 2 },
+    { letter: "  ", points: 0, quantity: 2 },
   ];
   let allLetters = [];
 
@@ -35,6 +35,7 @@ const allLeters = () => {
     while (quantity > 0) {
       allLetters.push(ell);
       quantity--;
+      delete ell.quantity;
     }
     return allLeters;
   });

@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import allLetters from "./Data/letterdb";
 
-const Game = ({ origin, selectOrigin }) => {
+const Game = ({
+  availableLetters,
+  setAvailableLetters,
+  gameState,
+  setGameState,
+  origin,
+  selectOrigin,
+  direction,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [availableLetters, setAvailableLetters] = useState(allLetters());
   const [playerOneLetters, setPlayerOneLetters] = useState([]);
   const [playerTwoLetters, setPlayerTwoLetters] = useState([]);
-  const [gameState, setGameState] = useState({
-    turn: 1,
-    round: 1,
-    isPlayerOneTurn: true,
-    currentScore: 0,
-    scorePlayerOne: 0,
-    scorePlayerTwo: 0,
-  });
+  const [word, setWord] = useState([]);
 
   function assingLettersToPlayer(playerLetters) {
     let playerHand = playerLetters;
@@ -35,13 +34,30 @@ const Game = ({ origin, selectOrigin }) => {
     // eslint-disable-next-line
   }, [gameState.turn]);
 
+  const handleClick = (e) => {
+    if (origin.x !== 0 && direction) {
+      var letter = playerOneLetters.find((ell) => ell.letter === e);
+
+      setPlayerOneLetters(
+        playerOneLetters.filter((ell) => {
+          if (ell.letter !== e) {
+            return true;
+          } else {
+            e = "";
+          }
+        })
+      );
+
+      console.log(letter);
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(e.target[0].value);
     setIsLoading(true);
     let nextGameState = { ...gameState };
     nextGameState.turn++;
-    //nextGameState.currentScore++;
     nextGameState.round = Math.round(nextGameState.turn / 2);
     if (nextGameState.turn % 2 !== 0) {
       nextGameState.isPlayerOneTurn = true;
@@ -51,8 +67,6 @@ const Game = ({ origin, selectOrigin }) => {
     setGameState(nextGameState);
     selectOrigin(0, 0);
   };
-
-  console.log(origin);
 
   if (isLoading)
     return (
@@ -64,26 +78,24 @@ const Game = ({ origin, selectOrigin }) => {
   if (gameState.isPlayerOneTurn)
     return (
       <div className="player">
-        <p>Round: {gameState.round}</p>
-        {origin.x === 0 && <p> Select origin</p>}
-        <br />
         <div className="board-row">
           <h1>Player One:</h1>
           <span>
             {playerOneLetters.map((tile, index) => (
-              <p key={index} className="tile">
+              <button
+                onClick={() => handleClick(tile.letter)}
+                key={index}
+                className="tile"
+              >
                 {tile.letter}
-              </p>
+              </button>
             ))}
-            <p>Score: {gameState.scorePlayerOne}</p>
           </span>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              defaultValue="write the word"
-              onChange={(e) => e.target.value}
-            ></input>
-            <button type="submit">Sumbit</button>
-          </form>
+          {origin.x !== 0 && (
+            <form onSubmit={(e) => handleSubmit(e)}>
+              {direction && <button type="submit">Sumbit</button>}
+            </form>
+          )}
         </div>
       </div>
     );
@@ -91,9 +103,6 @@ const Game = ({ origin, selectOrigin }) => {
   if (!gameState.isPlayerOneTurn)
     return (
       <div className="player">
-        <p>Round: {gameState.round}</p>
-        {origin.x === 0 && <p> Select origin</p>}
-        <br />
         <div className="board-row">
           <h1>Player Two:</h1>
           <span>
@@ -106,11 +115,14 @@ const Game = ({ origin, selectOrigin }) => {
                 {tile.letter}
               </button>
             ))}
-            <p>Score: {gameState.scorePlayerOne}</p>
           </span>
           <form onSubmit={(e) => handleSubmit(e)}>
-            <input onChange={(e) => e.target.value}></input>
-            <button type="submit">Sumbit</button>
+            <input
+              required
+              defaultValue="write the word"
+              onChange={(e) => e.target.value}
+            ></input>
+            {direction && <button type="submit">Sumbit</button>}
           </form>
         </div>
       </div>

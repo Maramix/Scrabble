@@ -1,17 +1,30 @@
+.main{
+  font-family: 'Courier New', monospace;
+  background-color: #0098c6;
+  background-image: linear-gradient(to left, #c6c6c6, #def7d0);
+  height: 700px;
+  
+
+  
+}
+
 .cell {
-  background-color: #92b67d;
   width: 35px;
   height: 35px;
-  display: inline-block;
-  align-items: stretch;
   vertical-align: top;
   text-align: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  border: 0.5px solid black;
+  border: 0.7px solid rgb(0, 0, 0);
+  border-radius: 13%;
+  padding:0;
+  font-weight: bolder;
+  color: #3a3e29;
 }
 .tile {
-  background-color: #e9ee5a;
+  background-color: #fbff84;
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: capitalize;
+  text-align: justify;
   width: 35px;
   height: 35px;
   display: inline-block;
@@ -20,42 +33,78 @@
   text-align: center;
   margin-top: 0px;
   margin-bottom: 0px;
-  border: 0.5px solid black;
+  border: 0.5px solid rgb(180, 180, 0);
+  border-radius: 13%;
 }
 
-.board-row {
-  display: grid;
-  align-items: center;
-  justify-content: center;
+.game-bar {
+  display:inline-block;
+  position: absolute;
+  align-items: top;
+  height: 350px;
+}
+.game-bar li {
+font-size: larger;
+padding:2px;
+margin: 3px;
+  font-weight: bold;
+}
+.game-bar h1 {
+margin-bottom: 3px;
 }
 
-.Navbar-header {
+.game-bar p {
+  font-size: larger;
+  padding:2px;
+  margin: 5px;
+    font-weight: bold;
+  }
+
+.Navbar {
+  text-shadow: 1px 1px #00000066;
+  display:block;
+border-radius: 30px;
+  text-align: center;
   background-color: #6ac039;
+  background-image: linear-gradient(to bottom, #bcc73f, #5e7706);
   min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(20px + 2vmin);
-  color: rgb(0, 0, 0);
+  font-size: 50px;
+  font-weight: bold;
+  color: rgb(57, 51, 51);
 }
 
-.Navbar-link {
-  background-color: #54ad20;
-  color: #a4a4a4;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-  font-size: calc(10px + 2vmin);
+.Navbar-title {
+  display: inline-block;
+  justify-content: left;
+  padding: 10px;
+  margin-right: 100px;
 }
+.Navbar-links {
+  
+  color: #a4a4a4;
+  display: inline-block;
+  justify-content: right;
+  font-size: 20px;
+  padding: 7px;
+
+}
+
+.Navbar-links a {
+  padding: 10px;
+  color: #333333;
+}
+
 
 .player {
-  display: flex;
-  justify-content: center;
+  display: inline-block;
+  height:220px;
 }
 
-.game.layout {
-  display: flex;
-  flex-direction: column;
+
+.board{
+  display: inline-block;
+  width: 525px;
+  margin-right: 10%;
+  margin-left: 10%;
+  
 }

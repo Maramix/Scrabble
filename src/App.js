@@ -7,7 +7,7 @@ import Multiplayer from "./Multiplayer";
 
 function App() {
   return (
-    <div>
+    <div className="main">
       <Router>
         <Navbar />
         <Switch>

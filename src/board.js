@@ -10,7 +10,23 @@ const Board = ({ selectOrigin }) => {
     ["", "", "", "", "DWS", "", "", "", "", "", "DWS", "", "", "", ""],
     ["", "TLS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "TLS", ""],
     ["", "", "DLS", "", "", "", "DLS", "", "DLS", "", "", "", "DLS", "", ""],
-    ["TWS", "", "", "DLS", "", "", "", "O", "", "", "", "DLS", "", "", "TWS"],
+    [
+      "TWS",
+      "",
+      "",
+      "DLS",
+      "",
+      "",
+      "",
+      String.fromCharCode(9734),
+      "",
+      "",
+      "",
+      "DLS",
+      "",
+      "",
+      "TWS",
+    ],
     ["", "", "DLS", "", "", "", "DLS", "", "DLS", "", "", "", "DLS", "", ""],
     ["", "TLS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "TLS", ""],
     ["", "", "", "", "DWS", "", "", "", "", "", "DWS", "", "", "", ""],
@@ -29,7 +45,7 @@ const Board = ({ selectOrigin }) => {
           cellColor = "powderblue";
           break;
         case "TLS":
-          cellColor = "mediumvioletred";
+          cellColor = "#be69b1";
           break;
         case "DWS":
           cellColor = "pink";
@@ -37,11 +53,14 @@ const Board = ({ selectOrigin }) => {
         case "TWS":
           cellColor = "tomato";
           break;
-        case "O":
+        case String.fromCharCode(9734):
           cellColor = "wheat";
           break;
-        default:
+        case "":
           cellColor = "whitesmoke";
+          break;
+        default:
+          cellColor = "yellow";
           break;
       }
       boardCells[i].push({
@@ -61,8 +80,8 @@ const Board = ({ selectOrigin }) => {
   }
 
   return (
-    <div>
-      <span className="board-row">
+    <div className="board">
+      <span>
         {boardCellsState.map((row, index) => (
           <div key={index}>
             {row.map((cell, index2) => (

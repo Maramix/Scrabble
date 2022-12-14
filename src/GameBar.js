@@ -14,10 +14,11 @@ const GameBar = ({
       <li>Player Two: {gameState.scorePlayerTwo} points</li>
       <li>Current word: {gameState.currentScore} points</li>
       <h1>Next action:</h1>
-      {origin.x === 0 && <p>Click on board to select origin</p>}
-      {origin.x !== 0 && (
+      {!origin[0] && !origin[1] && <p>- Click on board to select origin -</p>}
+      {console.log(origin)}
+      {(origin[0] || origin[1]) && (
         <div>
-          <p> Select direction</p>
+          <p>- Select direction -</p>
           <button onClick={() => setDirection("horizontally")}>
             {String.fromCharCode(8596)}
           </button>

@@ -1,7 +1,7 @@
 .main{
   font-family: 'Courier New', monospace;
   background-color: #0098c6;
-  background-image: linear-gradient(to left, #c6c6c6, #def7d0);
+  background-image: linear-gradient(to left, #e2e2e2, #dcedd2);
   height: 700px;
   
 
@@ -12,15 +12,18 @@
   width: 35px;
   height: 35px;
   vertical-align: top;
+  text-transform: capitalize;
+  font-size: 15px;
   text-align: center;
   border: 0.7px solid rgb(0, 0, 0);
   border-radius: 13%;
   padding:0;
   font-weight: bolder;
   color: #3a3e29;
+  margin:0
 }
 .tile {
-  background-color: #fbff84;
+  background-color: #e9e574;
   font-size: 22px;
   font-weight: bold;
   text-transform: capitalize;
@@ -35,6 +38,17 @@
   margin-bottom: 0px;
   border: 0.5px solid rgb(180, 180, 0);
   border-radius: 13%;
+}
+
+.tile:hover, .cell:hover {
+  border: 3px solid rgb(140, 55, 55)
+}
+
+.tile p{
+  padding: 0;
+  margin-top: 0;
+  font-size: 10px;
+  text-align: right;
 }
 
 .game-bar {
@@ -58,6 +72,7 @@ margin-bottom: 3px;
   padding:2px;
   margin: 5px;
     font-weight: bold;
+    font-style: italic;
   }
 
 .Navbar {
@@ -66,7 +81,7 @@ margin-bottom: 3px;
 border-radius: 30px;
   text-align: center;
   background-color: #6ac039;
-  background-image: linear-gradient(to bottom, #bcc73f, #5e7706);
+  background-image: linear-gradient(to bottom, #00bfb0, #007970);
   min-height: 10vh;
   font-size: 50px;
   font-weight: bold;
@@ -106,5 +121,6 @@ border-radius: 30px;
   width: 525px;
   margin-right: 10%;
   margin-left: 10%;
-  
+  border: #333333 4px solid;
+  border-radius: 1.5%;
 }

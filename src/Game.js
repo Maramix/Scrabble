@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import Player from "./Player";
 
 const Game = ({
+  boardCoordinates,
+  setBoardCoordinates,
   availableLetters,
   setAvailableLetters,
   gameState,
@@ -8,11 +11,13 @@ const Game = ({
   origin,
   selectOrigin,
   direction,
+  setDirection,
 }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [playerOneLetters, setPlayerOneLetters] = useState([]);
   const [playerTwoLetters, setPlayerTwoLetters] = useState([]);
   const [word, setWord] = useState([]);
+  const [currentWordMultiplier, setCurrentWordMultiplier] = useState(1);
 
   function assingLettersToPlayer(playerLetters) {
     let playerHand = playerLetters;
@@ -35,20 +40,41 @@ const Game = ({
   }, [gameState.turn]);
 
   const handleClick = (e) => {
+    let tempWord = [...word];
+
     if (origin.x !== 0 && direction) {
-      var letter = playerOneLetters.find((ell) => ell.letter === e);
-
-      setPlayerOneLetters(
-        playerOneLetters.filter((ell) => {
-          if (ell.letter !== e) {
-            return true;
-          } else {
-            e = "";
-          }
-        })
-      );
-
-      console.log(letter);
+      if (gameState.isPlayerOneTurn) {
+        var letter = playerOneLetters.find((ell) => ell.letter === e);
+        setPlayerOneLetters(
+          playerOneLetters.filter((ell) => {
+            if (ell.letter !== e) {
+              return true;
+            } else {
+              e = "";
+              return null;
+            }
+          })
+        );
+        tempWord.push(letter);
+        setWord(tempWord);
+        console.log(word);
+      }
+      if (!gameState.isPlayerOneTurn) {
+        var letter = playerTwoLetters.find((ell) => ell.letter === e);
+        setPlayerTwoLetters(
+          playerTwoLetters.filter((ell) => {
+            if (ell.letter !== e) {
+              return true;
+            } else {
+              e = "";
+              return null;
+            }
+          })
+        );
+        tempWord.push(letter);
+        setWord(tempWord);
+        console.log(word);
+      }
     }
   };
 
@@ -65,8 +91,56 @@ const Game = ({
       nextGameState.isPlayerOneTurn = false;
     }
     setGameState(nextGameState);
-    selectOrigin(0, 0);
+    selectOrigin(null, null);
+    setDirection();
+    setCurrentWordMultiplier(1);
+    setWord([]);
+    setGameState((gameState) => {
+      if (!gameState.isPlayerOneTurn)
+        gameState.scorePlayerOne +=
+          gameState.currentScore * currentWordMultiplier;
+      if (gameState.isPlayerOneTurn)
+        gameState.scorePlayerTwo +=
+          gameState.currentScore * currentWordMultiplier;
+      gameState.currentScore = 0;
+      return gameState;
+    });
   };
+
+  //hook tracks current value of the word
+  useEffect(() => {
+    let score = gameState.currentScore;
+    let currentLetterMultiplier = 1;
+    let tempBoard = [...boardCoordinates];
+
+    if (origin[0]) {
+      if (boardCoordinates[origin[0]][origin[1]] === "TLS")
+        currentLetterMultiplier = 3;
+      if (boardCoordinates[origin[0]][origin[1]] === "DLS")
+        currentLetterMultiplier = 2;
+      if (boardCoordinates[origin[0]][origin[1]] === "TWS")
+        setCurrentWordMultiplier(currentWordMultiplier * 3);
+      if (boardCoordinates[origin[0]][origin[1]] === "DWS")
+        setCurrentWordMultiplier(currentWordMultiplier * 2);
+      if (direction === "vertically") selectOrigin(origin[0] + 1, origin[1]);
+      if (direction === "horizontally") selectOrigin(origin[0], origin[1] + 1);
+      console.log(
+        boardCoordinates[origin[0]][origin[1]],
+        currentWordMultiplier
+      );
+      if (word.length > 0)
+        score += word[word.length - 1].points * currentLetterMultiplier;
+      setGameState((gameState) => {
+        gameState.currentScore = score;
+        return { ...gameState };
+      });
+
+      tempBoard[origin[0]][origin[1]] = word[word.length - 1].letter;
+      setBoardCoordinates(tempBoard);
+    }
+    console.log(word[word.length - 1]);
+    // eslint-disable-next-line
+  }, [word]);
 
   if (isLoading)
     return (
@@ -75,58 +149,19 @@ const Game = ({
       </div>
     );
 
-  if (gameState.isPlayerOneTurn)
-    return (
-      <div className="player">
-        <div className="board-row">
-          <h1>Player One:</h1>
-          <span>
-            {playerOneLetters.map((tile, index) => (
-              <button
-                onClick={() => handleClick(tile.letter)}
-                key={index}
-                className="tile"
-              >
-                {tile.letter}
-              </button>
-            ))}
-          </span>
-          {origin.x !== 0 && (
-            <form onSubmit={(e) => handleSubmit(e)}>
-              {direction && <button type="submit">Sumbit</button>}
-            </form>
-          )}
-        </div>
-      </div>
-    );
-
-  if (!gameState.isPlayerOneTurn)
-    return (
-      <div className="player">
-        <div className="board-row">
-          <h1>Player Two:</h1>
-          <span>
-            {playerTwoLetters.map((tile, index) => (
-              <button
-                onClick={() => console.log("elo")}
-                key={index}
-                className="tile"
-              >
-                {tile.letter}
-              </button>
-            ))}
-          </span>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <input
-              required
-              defaultValue="write the word"
-              onChange={(e) => e.target.value}
-            ></input>
-            {direction && <button type="submit">Sumbit</button>}
-          </form>
-        </div>
-      </div>
-    );
+  return (
+    <div className="player">
+      <Player
+        playerOneLetters={playerOneLetters}
+        playerTwoLetters={playerTwoLetters}
+        isPlayerOneTurn={gameState.isPlayerOneTurn}
+        handleClick={handleClick}
+        handleSubmit={handleSubmit}
+        origin={origin}
+        direction={direction}
+      />
+    </div>
+  );
 };
 
 export default Game;

@@ -1,41 +1,6 @@
-import { useState } from "react";
 import "./App.css";
 
-const Board = ({ selectOrigin }) => {
-  const boardCoordinates = [
-    ["TWS", "", "", "DLS", "", "", "", "TWS", "", "", "", "DLS", "", "", "TWS"],
-    ["", "DWS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "DWS", ""],
-    ["", "", "DWS", "", "", "", "DLS", "", "DLS", "", "", "", "DWS", "", ""],
-    ["DLS", "", "", "DWS", "", "", "", "DLS", "", "", "", "DWS", "", "", "DLS"],
-    ["", "", "", "", "DWS", "", "", "", "", "", "DWS", "", "", "", ""],
-    ["", "TLS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "TLS", ""],
-    ["", "", "DLS", "", "", "", "DLS", "", "DLS", "", "", "", "DLS", "", ""],
-    [
-      "TWS",
-      "",
-      "",
-      "DLS",
-      "",
-      "",
-      "",
-      String.fromCharCode(9734),
-      "",
-      "",
-      "",
-      "DLS",
-      "",
-      "",
-      "TWS",
-    ],
-    ["", "", "DLS", "", "", "", "DLS", "", "DLS", "", "", "", "DLS", "", ""],
-    ["", "TLS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "TLS", ""],
-    ["", "", "", "", "DWS", "", "", "", "", "", "DWS", "", "", "", ""],
-    ["DLS", "", "", "DWS", "", "", "", "DLS", "", "", "", "DWS", "", "", "DLS"],
-    ["", "", "DWS", "", "", "", "DLS", "", "DLS", "", "", "", "DWS", "", ""],
-    ["", "DWS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "DWS", ""],
-    ["TWS", "", "", "DLS", "", "", "", "TWS", "", "", "", "DLS", "", "", "TWS"],
-  ];
-
+const Board = ({ boardCoordinates, selectOrigin }) => {
   let boardCells = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
   let cellColor = "";
   for (let i = 0; i < 15; i++) {
@@ -60,29 +25,23 @@ const Board = ({ selectOrigin }) => {
           cellColor = "whitesmoke";
           break;
         default:
-          cellColor = "yellow";
+          cellColor = "#e9e590";
           break;
       }
       boardCells[i].push({
         value: boardCoordinates[i][j],
-        x: i + 1,
-        y: j + 1,
+        x: i,
+        y: j,
         color: cellColor,
         letter: "",
       });
     }
   }
 
-  // function sets new value for the cell on the board
-  const [boardCellsState, setBoardCellsState] = useState(boardCells);
-  function setCellValue(x, y, newValue) {
-    console.log(boardCellsState[x][y], newValue);
-  }
-
   return (
     <div className="board">
       <span>
-        {boardCellsState.map((row, index) => (
+        {boardCells.map((row, index) => (
           <div key={index}>
             {row.map((cell, index2) => (
               <button

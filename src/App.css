@@ -37,8 +37,7 @@
   margin-top: 0px;
   margin-bottom: 0px;
   border: 0.5px solid rgb(180, 180, 0);
-  border-radius: 13%;
-}
+  border-radius: 13%;}
 
 .tile:hover, .cell:hover {
   border: 3px solid rgb(140, 55, 55)
@@ -73,6 +72,9 @@ margin-bottom: 3px;
   margin: 5px;
     font-weight: bold;
     font-style: italic;
+  }
+  .game-bar button{
+    width: 50px;
   }
 
 .Navbar {

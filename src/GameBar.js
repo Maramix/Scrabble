@@ -4,6 +4,7 @@ const GameBar = ({
   origin,
   direction,
   setDirection,
+  wordMultiplier,
 }) => {
   return (
     <div className="game-bar">
@@ -12,18 +13,21 @@ const GameBar = ({
       <li>Letters in bag left: {availableLetters.length}</li>
       <li>Player one: {gameState.scorePlayerOne} points</li>
       <li>Player Two: {gameState.scorePlayerTwo} points</li>
-      <li>Current word: {gameState.currentScore} points</li>
+      {direction && (
+        <li>
+          Current word: {gameState.currentScore} points x {wordMultiplier}
+        </li>
+      )}
       <h1>Next action:</h1>
-      {!origin[0] && !origin[1] && <p>- Click on board to select origin -</p>}
-      {console.log(origin)}
-      {(origin[0] || origin[1]) && (
+      {!origin && <p>&#171; Click on board to select origin &#187;</p>}
+      {origin && (
         <div>
-          <p>- Select direction -</p>
+          <p>&#171; Select direction &#187;</p>
           <button onClick={() => setDirection("horizontally")}>
-            {String.fromCharCode(8596)}
+            {String.fromCharCode(8594)}
           </button>
           <button onClick={() => setDirection("vertically")}>
-            {String.fromCharCode(8597)}
+            {String.fromCharCode(8595)}
           </button>
         </div>
       )}

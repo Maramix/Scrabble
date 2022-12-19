@@ -1,6 +1,6 @@
 import "./App.css";
 
-const Board = ({ boardCoordinates, selectOrigin }) => {
+const Board = ({ boardCoordinates, setOrigin }) => {
   let boardCells = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
   let cellColor = "";
   for (let i = 0; i < 15; i++) {
@@ -45,7 +45,7 @@ const Board = ({ boardCoordinates, selectOrigin }) => {
           <div key={index}>
             {row.map((cell, index2) => (
               <button
-                onClick={() => selectOrigin(cell.x, cell.y)}
+                onClick={() => setOrigin([cell.x, cell.y])}
                 key={index2}
                 style={{ backgroundColor: cell.color }}
                 className="cell"

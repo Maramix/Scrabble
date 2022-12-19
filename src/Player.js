@@ -24,7 +24,13 @@ const Player = ({
         <span>
           {playerLetters.map((tile, index) => (
             <button
-              onClick={() => handleClick(tile.letter)}
+              onClick={() => {
+                if (origin) {
+                  if (origin[0] < 15 && origin[1] < 15)
+                    handleClick(tile.letter);
+                  else alert("You are out of the board!");
+                }
+              }}
               key={index}
               className="tile"
             >
@@ -32,7 +38,7 @@ const Player = ({
             </button>
           ))}
         </span>
-        {origin[0] && direction && (
+        {direction && (
           <form onSubmit={(e) => handleSubmit(e)}>
             <button type="submit">Sumbit</button>
           </form>

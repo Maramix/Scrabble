@@ -3,42 +3,10 @@ import allLetters from "./Data/letterdb";
 import Board from "./board";
 import GameBar from "./GameBar";
 import Game from "./Game";
+import { boardValues } from "./utility";
 
 const Multiplayer = () => {
-  const [boardCoordinates, setBoardCoordinates] = useState([
-    ["TWS", "", "", "DLS", "", "", "", "TWS", "", "", "", "DLS", "", "", "TWS"],
-    ["", "DWS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "DWS", ""],
-    ["", "", "DWS", "", "", "", "DLS", "", "DLS", "", "", "", "DWS", "", ""],
-    ["DLS", "", "", "DWS", "", "", "", "DLS", "", "", "", "DWS", "", "", "DLS"],
-    ["", "", "", "", "DWS", "", "", "", "", "", "DWS", "", "", "", ""],
-    ["", "TLS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "TLS", ""],
-    ["", "", "DLS", "", "", "", "DLS", "", "DLS", "", "", "", "DLS", "", ""],
-    [
-      "TWS",
-      "",
-      "",
-      "DLS",
-      "",
-      "",
-      "",
-      String.fromCharCode(9734),
-      "",
-      "",
-      "",
-      "DLS",
-      "",
-      "",
-      "TWS",
-    ],
-    ["", "", "DLS", "", "", "", "DLS", "", "DLS", "", "", "", "DLS", "", ""],
-    ["", "TLS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "TLS", ""],
-    ["", "", "", "", "DWS", "", "", "", "", "", "DWS", "", "", "", ""],
-    ["DLS", "", "", "DWS", "", "", "", "DLS", "", "", "", "DWS", "", "", "DLS"],
-    ["", "", "DWS", "", "", "", "DLS", "", "DLS", "", "", "", "DWS", "", ""],
-    ["", "DWS", "", "", "", "TLS", "", "", "", "TLS", "", "", "", "DWS", ""],
-    ["TWS", "", "", "DLS", "", "", "", "TWS", "", "", "", "DLS", "", "", "TWS"],
-  ]);
-
+  const [boardCoordinates, setBoardCoordinates] = useState(boardValues());
   const [availableLetters, setAvailableLetters] = useState(allLetters());
   const [gameState, setGameState] = useState({
     turn: 1,
@@ -48,28 +16,23 @@ const Multiplayer = () => {
     scorePlayerOne: 0,
     scorePlayerTwo: 0,
   });
-  const [origin, setOrigin] = useState([null, null]);
+  const [origin, setOrigin] = useState();
   const [direction, setDirection] = useState(undefined);
   const [word, setWord] = useState([]);
-
-  const selectOrigin = (x, y) => {
-    setOrigin([x, y]);
-  };
+  const [wordMultiplier, setWordMultiplier] = useState(1);
 
   return (
     <div>
       <br />
       <span className="game-layout">
-        <Board
-          boardCoordinates={boardCoordinates}
-          selectOrigin={selectOrigin}
-        />
+        <Board boardCoordinates={boardCoordinates} setOrigin={setOrigin} />
         <GameBar
           availableLetters={availableLetters}
           gameState={gameState}
           origin={origin}
           direction={direction}
           setDirection={setDirection}
+          wordMultiplier={wordMultiplier}
         />
         <Game
           boardCoordinates={boardCoordinates}
@@ -79,11 +42,13 @@ const Multiplayer = () => {
           gameState={gameState}
           setGameState={setGameState}
           origin={origin}
-          selectOrigin={selectOrigin}
+          setOrigin={setOrigin}
           direction={direction}
           setDirection={setDirection}
           word={word}
           setWord={setWord}
+          wordMultiplier={wordMultiplier}
+          setWordMultiplier={setWordMultiplier}
         />
       </span>
     </div>

@@ -1,128 +1,220 @@
-.main{
-  font-family: 'Courier New', monospace;
-  background-color: #0098c6;
-  background-image: linear-gradient(to left, #e2e2e2, #dcedd2);
-  height: 700px;
-  
-
-  
+*{
+    margin:0;
+    padding: 0;
+    font: inherit;
 }
 
-.cell {
-  width: 35px;
-  height: 35px;
-  vertical-align: top;
-  text-transform: capitalize;
-  font-size: 15px;
-  text-align: center;
-  border: 0.7px solid rgb(0, 0, 0);
-  border-radius: 13%;
-  padding:0;
-  font-weight: bolder;
-  color: #3a3e29;
-  margin:0
-}
-.tile {
-  background-color: #e9e574;
-  font-size: 22px;
-  font-weight: bold;
-  text-transform: capitalize;
-  text-align: justify;
-  width: 35px;
-  height: 35px;
-  display: inline-block;
-  align-items: stretch;
-  vertical-align: top;
-  text-align: center;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  border: 0.5px solid rgb(180, 180, 0);
-  border-radius: 13%;}
-
-.tile:hover, .cell:hover {
-  border: 3px solid rgb(140, 55, 55)
+img{
+    display:block;
+    max-width: 100%;
 }
 
-.tile p{
-  padding: 0;
-  margin-top: 0;
-  font-size: 10px;
-  text-align: right;
+.main-container{
+display:flex;
+width:100%;
+min-width: 580px;
+font-family: 'Autour one', sans-serif;
+min-height: 100vh;
+flex-direction: column;
+align-items: flex-start;
+background-color: rgb(229, 233, 237);
 }
 
-.game-bar {
-  display:inline-block;
-  position: absolute;
-  align-items: top;
-  height: 350px;
+.navbar-container{
+display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(43, 43, 43);
+    width: 100%;
+    background-image: repeating-linear-gradient(-26deg, rgba(255, 255, 255, 0.155), rgba(255, 255, 255, 0.062) 2px, transparent 3px, transparent 7px);
+    background-size: 6px 8px;
 }
-.game-bar li {
-font-size: larger;
-padding:2px;
-margin: 3px;
-  font-weight: bold;
+.navbar-container header{
+    font-size: 2rem;
+    font-weight: bolder;
+    color: white;
+    margin: 0.75rem;
+    
 }
-.game-bar h1 {
-margin-bottom: 3px;
+.navbar-links {
+list-style: none;
+display: flex;
+margin: 10px;
 }
 
-.game-bar p {
-  font-size: larger;
-  padding:2px;
-  margin: 5px;
+.navbar-links li {
+   color: white;
+   margin: 5px;
+   display:block;
+   border: 1px solid white;
+   border-radius: 5px;
+    }
+
+    .navbar-links p {
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+.navbar-links li :visited{
+        color: white;
+       }
+
+.navbar-links li :hover{
+    background-color: rgb(79, 79, 79);
+    }
+
+.language-selection{
+    display:grid;
+    grid-template-columns: repeat(2 ,20%);
+justify-content: center;
+justify-items: center;
+    font-size: 2rem;
+}
+
+.language-selection h1{
+    grid-column: span 4;
     font-weight: bold;
-    font-style: italic;
-  }
-  .game-bar button{
-    width: 50px;
-  }
-
-.Navbar {
-  text-shadow: 1px 1px #00000066;
-  display:block;
-border-radius: 30px;
-  text-align: center;
-  background-color: #6ac039;
-  background-image: linear-gradient(to bottom, #00bfb0, #007970);
-  min-height: 10vh;
-  font-size: 50px;
-  font-weight: bold;
-  color: rgb(57, 51, 51);
+    margin: 10px;
+    text-decoration: underline;
 }
 
-.Navbar-title {
-  display: inline-block;
-  justify-content: left;
-  padding: 10px;
-  margin-right: 100px;
-}
-.Navbar-links {
-  
-  color: #a4a4a4;
-  display: inline-block;
-  justify-content: right;
-  font-size: 20px;
-  padding: 7px;
-
+.language-selection img{
+    
+    width: 60%;
+   aspect-ratio: 3/2;
+    margin:10px;
+    border: solid transparent 4px;
+    border-radius: 10px;
 }
 
-.Navbar-links a {
-  padding: 10px;
-  color: #333333;
+.language-selection img:hover{
+    border-color: black;
+    transition: 2s;
+}
+
+.game-container{
+    display:flex;
+    width:100%;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    
+}
+
+.game-bar-container{
+    width: 20vw;
+    text-align: center;
+    list-style: none;
+    align-self: center;
+    font-size: 1.5vw;
+    font-weight: bolder;
+}
+
+.button{
+    font-weight: bolder;
+    width: 120px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    margin: 5px;
+}
+
+.board-container{
+   display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40vw;
+    aspect-ratio: 1/1;
+    border: 4px solid black;
+    border-radius: 7px;
+    margin-top: 1.5vh;
+}
+
+.board-row{
+display:flex;
+justify-content: space-around;
+width:100%;
+height:calc(100%/15);
+}
+.board-cell{
+background-image: repeating-linear-gradient(-26deg, rgba(0, 0, 0, 0.047), rgba(0, 0, 0, 0.019) 2px, transparent 3px, transparent 7px);
+background-size: 6px 8px;
+flex-grow: 1;
+font-size: 1.1vw;
+text-transform: uppercase;
+width:calc(100%/15);
+height:100%;
+border:1px solid rgba(0, 0, 0, 0.651);
+border-radius: 10%;
+}
+
+.board-cell:hover ,  .toggleCell {
+    border: 0.4vh solid rgb(0, 0, 0);
+}
+.button:hover, .toggleButton{
+    background-color: rgb(189, 189, 189);
+}
+
+.player-container{
+    width: 20vw;
+    align-self: center;
+    text-align: center;
+    
+}
+
+.player-cells{
+    display: flex;
+    justify-content: center;
+    min-height:40px;
+}
+
+.player-cell{
+    font-size: 1vw;
+    font-weight: bolder;
+    text-transform: uppercase;
+    width:3vw;
+    height:3vw;
+    background-color: #FFE800;
+    border:1px solid rgba(0, 0, 0, 0.651);
+    border-radius: 10%;
+    flex-shrink: 0;
+}
+
+.player-cell:hover {
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.game-bar-container h1, .player-container h1{
+    font-size: 2rem;
+    font-weight: bolder;
+    text-decoration: underline;
+    margin-top: 3vw;
 }
 
 
-.player {
-  display: inline-block;
-  height:220px;
+
+@media (width<900px){
+    .game-container{
+        flex-direction: column;
+        align-content:center ;
+    }
+    .board-container{
+        width: 70vw;
+        order: 3;
+    }
+    .board-cell{
+        font-size: 2vw;
+    }
+.game-bar-container{
+    width:80vw;
+    font-size: 3vw;
+    order: 1;
 }
-
-
-.board{
-  display: inline-block;
-  width: 525px;
-  margin-right: 10%;
-  margin-left: 10%;
-  border: #333333 4px solid;
-  border-radius: 1.5%;
+    .player-container{
+        width: 40vw;
+        order:2; 
+    }
+    .player-cell{
+        font-size: 2vw;
+        width:5vw;
+        height:5vw;}
 }

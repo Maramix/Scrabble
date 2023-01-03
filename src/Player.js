@@ -19,9 +19,9 @@ const Player = ({
   }
   return (
     <div>
-      <div className="board-row">
+      <div>
         <h1>{player}</h1>
-        <span>
+        <div className="player-cells">
           {playerLetters.map((tile, index) => (
             <button
               onClick={() => {
@@ -32,15 +32,27 @@ const Player = ({
                 }
               }}
               key={index}
-              className="tile"
+              className="player-cell"
             >
-              {tile.letter} <p>{tile.points}</p>
+              {tile.letter}{" "}
+              <p
+                style={{
+                  fontSize: "0.6vw",
+                  position: "relative",
+                  top: "2%",
+                  left: "25%",
+                }}
+              >
+                {tile.points}
+              </p>
             </button>
           ))}
-        </span>
+        </div>
         {direction && (
           <form onSubmit={(e) => handleSubmit(e)}>
-            <button type="submit">Sumbit</button>
+            <button className="button" type="submit">
+              Sumbit
+            </button>
           </form>
         )}
       </div>

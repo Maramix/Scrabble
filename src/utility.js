@@ -42,3 +42,8 @@ export const boardValues = () => {
   ];
   return values;
 };
+
+export const deepClone = (value) => {
+  const clone = JSON.parse(JSON.stringify(value));
+  return clone;
+};

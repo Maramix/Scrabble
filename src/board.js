@@ -1,6 +1,6 @@
 import "./App.css";
 
-const Board = ({ boardCoordinates, setOrigin }) => {
+const Board = ({ boardCoordinates, setOrigin, origin, word }) => {
   let boardCells = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
   let cellColor = "";
   for (let i = 0; i < 15; i++) {
@@ -10,22 +10,22 @@ const Board = ({ boardCoordinates, setOrigin }) => {
           cellColor = "powderblue";
           break;
         case "TLS":
-          cellColor = "#be69b1";
+          cellColor = "#A274D3";
           break;
         case "DWS":
           cellColor = "pink";
           break;
         case "TWS":
-          cellColor = "tomato";
+          cellColor = "#FF5100";
           break;
         case String.fromCharCode(9734):
-          cellColor = "wheat";
+          cellColor = "#FFE800";
           break;
         case "":
           cellColor = "whitesmoke";
           break;
         default:
-          cellColor = "#e9e590";
+          cellColor = "#FFE800";
           break;
       }
       boardCells[i].push({
@@ -38,25 +38,37 @@ const Board = ({ boardCoordinates, setOrigin }) => {
     }
   }
 
+  if (origin) {
+    const toggledCell = document.getElementsByClassName("toggleCell");
+    toggledCell.length > 0 && toggledCell[0].classList.remove("toggleCell");
+    const cellToToggle = document.getElementById(
+      origin[0].toString() + "." + origin[1].toString()
+    );
+    cellToToggle && cellToToggle.classList.add("toggleCell");
+  }
+
   return (
-    <div className="board">
-      <span>
-        {boardCells.map((row, index) => (
-          <div key={index}>
-            {row.map((cell, index2) => (
-              <button
-                onClick={() => setOrigin([cell.x, cell.y])}
-                key={index2}
-                style={{ backgroundColor: cell.color }}
-                className="cell"
-              >
-                {cell.value}
-              </button>
-            ))}
-            {index % 15 === 0 && <br />}
-          </div>
-        ))}
-      </span>
+    <div className="board-container">
+      {boardCells.map((row, index) => (
+        <div className="board-row" key={index}>
+          {row.map((cell, index2) => (
+            <button
+              className="board-cell"
+              onClick={() => {
+                if (word.length === 0) {
+                  setOrigin([cell.x, cell.y]);
+                }
+              }}
+              key={index2}
+              style={{ backgroundColor: cell.color }}
+              id={index.toString() + "." + index2.toString()}
+            >
+              {cell.value}
+            </button>
+          ))}
+          {index % 15 === 0 && <br />}
+        </div>
+      ))}
     </div>
   );
 };

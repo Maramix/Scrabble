@@ -1,8 +1,19 @@
+// npx json-server --watch src/Data/savedGames.json --port 8000
+
 import { useEffect, useState } from "react";
 import Player from "./Player";
-import { boardValues, deepClone } from "./utility";
+import {
+  checkForExtraWord,
+  boardValues,
+  deepClone,
+  isOccupied,
+  toggleVisibilityByClassName,
+  saveGame,
+} from "./utility";
+import swal from "sweetalert";
 
 const Game = ({
+  language,
   boardCoordinates,
   setBoardCoordinates,
   availableLetters,
@@ -18,13 +29,18 @@ const Game = ({
   word,
   setWord,
 }) => {
+  const savedGamesUrl = "http://localhost:8000/savedGames";
   const [isLoading, setIsLoading] = useState(false);
   const [playerOneLetters, setPlayerOneLetters] = useState([]);
   const [playerTwoLetters, setPlayerTwoLetters] = useState([]);
+  // eslint-disable-next-line
   const [isPlacedCorrectly, setIsPlacedCorectly] = useState(true);
   const [currentPlayerInitialLetters, setCurrentPlayerInitialLetters] =
     useState([]);
   const [tempCoordinates, setTempCoordinates] = useState(boardValues());
+  const [wordsInRound, setWordsInRound] = useState([
+    { word: "", points: "", multiplier: "" },
+  ]);
 
   const iterateOrigin = () => {
     let x = origin[0];
@@ -32,6 +48,13 @@ const Game = ({
     if (direction === "vertically") setOrigin([x + 1, y]);
     if (direction === "horizontally") setOrigin([x, y + 1]);
   };
+
+  //hook skips occupied cells when iterating origin
+  useEffect(() => {
+    checkForExtraWord(boardCoordinates, origin, direction);
+    if (isOccupied(boardCoordinates, origin)) iterateOrigin();
+    // eslint-disable-next-line
+  }, [origin]);
 
   //hook tracks current value of the word
   useEffect(() => {
@@ -72,15 +95,14 @@ const Game = ({
     }
 
     if (gameState.isPlayerOneTurn) setPlayerOneLetters(playerHand);
-    if (!gameState.isPlayerOneTurn) setPlayerTwoLetters(playerHand);
+    else setPlayerTwoLetters(playerHand);
   }
   //assigning letters to players and removing letters from availableLetters
   useEffect(() => {
     if (gameState.isPlayerOneTurn) {
       setCurrentPlayerInitialLetters(playerOneLetters);
       assingLettersToPlayer(playerOneLetters);
-    }
-    if (!gameState.isPlayerOneTurn) {
+    } else {
       setCurrentPlayerInitialLetters(playerTwoLetters);
       assingLettersToPlayer(playerTwoLetters);
     }
@@ -89,67 +111,65 @@ const Game = ({
 
   const handleClick = (e) => {
     var letter;
+    let key;
+    if (gameState.isPlayerOneTurn) key = "One";
+    else key = "Two";
     if (origin.x !== 0 && direction) {
-      if (gameState.isPlayerOneTurn) {
-        letter = playerOneLetters.find((ell) => ell.letter === e);
-        setPlayerOneLetters(
-          playerOneLetters.filter((ell) => {
-            if (ell.letter !== e) {
-              return true;
-            } else {
-              e = "";
-              return null;
-            }
-          })
-        );
-        const newWord = [...word, letter];
-        setWord(newWord);
-      }
-      if (!gameState.isPlayerOneTurn) {
-        letter = playerTwoLetters.find((ell) => ell.letter === e);
-        setPlayerTwoLetters(
-          playerTwoLetters.filter((ell) => {
-            if (ell.letter !== e) {
-              return true;
-            } else {
-              e = "";
-              return null;
-            }
-          })
-        );
-        const newWord = [...word, letter];
-        setWord(newWord);
-      }
+      letter = eval("player" + key + "Letters").find((ell) => ell.letter === e);
+      eval("setPlayer" + key + "Letters")(
+        eval("player" + key + "Letters").filter((ell) => {
+          if (ell.letter !== e) {
+            return true;
+          } else {
+            e = "";
+            return null;
+          }
+        })
+      );
+      const newWord = [...word, letter];
+      setWord(newWord);
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setTempCoordinates(deepClone(boardCoordinates));
-    if (isPlacedCorrectly) {
-      setIsLoading(true);
-      let nextGameState = { ...gameState };
-      nextGameState.turn++;
-      nextGameState.round = Math.round(nextGameState.turn / 2);
-      if (nextGameState.turn % 2 !== 0) {
-        nextGameState.isPlayerOneTurn = true;
-      } else {
-        nextGameState.isPlayerOneTurn = false;
-      }
-      setGameState(nextGameState);
-      setOrigin();
-      setDirection();
-      setWordMultiplier(1);
-      setWord([]);
-      setGameState((gameState) => {
-        if (!gameState.isPlayerOneTurn)
-          gameState.scorePlayerOne += gameState.currentScore * wordMultiplier;
-        if (gameState.isPlayerOneTurn)
-          gameState.scorePlayerTwo += gameState.currentScore * wordMultiplier;
-        gameState.currentScore = 0;
-        return gameState;
-      }, setIsLoading(false));
-    } else alert("Your word is placed incorectly!");
+    if (!isOccupied(boardCoordinates, [7, 7]))
+      swal("First word must go through the center field");
+    else {
+      setTempCoordinates(deepClone(boardCoordinates));
+      if (isPlacedCorrectly) {
+        setIsLoading(true);
+        let nextGameState = { ...gameState };
+        nextGameState.turn++;
+        nextGameState.round = Math.round(nextGameState.turn / 2);
+        if (nextGameState.turn % 2 !== 0) {
+          nextGameState.isPlayerOneTurn = true;
+        } else {
+          nextGameState.isPlayerOneTurn = false;
+        }
+        setGameState(nextGameState);
+        setOrigin();
+        setDirection();
+        setWordMultiplier(1);
+        setWord([]);
+        toggleVisibilityByClassName("handover-container");
+        saveGame(
+          savedGamesUrl,
+          gameState,
+          boardCoordinates,
+          availableLetters,
+          language
+        );
+        setGameState((gameState) => {
+          if (!gameState.isPlayerOneTurn)
+            gameState.scorePlayerOne += gameState.currentScore * wordMultiplier;
+          if (gameState.isPlayerOneTurn)
+            gameState.scorePlayerTwo += gameState.currentScore * wordMultiplier;
+          gameState.currentScore = 0;
+          return gameState;
+        }, setIsLoading(false));
+      } else swal("Your word is placed incorectly!");
+    }
   };
 
   const handleReset = () => {

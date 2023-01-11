@@ -1,0 +1,26 @@
+.swal-modal{
+    background-color: rgb(255, 255, 255);
+    font-family:  'Autour one', sans-serif;
+    color: black;
+    justify-content: center;
+    width:30vw;
+}
+
+.swal-text{
+    font-size: 1.5vw;
+    color: black;
+    text-align: center;
+}
+
+.swal-button{
+    background-color: rgb(205, 205, 205);
+    border: solid black 2px;
+    font-size: 1.5vw;
+}
+
+.swal-footer {
+    text-align: center;}
+
+.swal-button:not([disabled]):hover {
+    background-color: #717171;
+}

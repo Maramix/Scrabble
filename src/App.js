@@ -1,4 +1,5 @@
 import "./App.css";
+import "./swal.css";
 import Navbar from "./Navbar";
 import Singleplayer from "./Singleplayer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";

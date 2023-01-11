@@ -1,4 +1,5 @@
 import "./App.css";
+import { isOccupied } from "./utility";
 
 const Board = ({ boardCoordinates, setOrigin, origin, word }) => {
   let boardCells = [[], [], [], [], [], [], [], [], [], [], [], [], [], [], []];
@@ -55,7 +56,10 @@ const Board = ({ boardCoordinates, setOrigin, origin, word }) => {
             <button
               className="board-cell"
               onClick={() => {
-                if (word.length === 0) {
+                if (
+                  word.length === 0 &&
+                  !isOccupied(boardCoordinates, [index, index2])
+                ) {
                   setOrigin([cell.x, cell.y]);
                 }
               }}

@@ -1,3 +1,5 @@
+import swal from "sweetalert";
+
 const Player = ({
   playerOneLetters,
   playerTwoLetters,
@@ -28,7 +30,7 @@ const Player = ({
                 if (origin) {
                   if (origin[0] < 15 && origin[1] < 15)
                     handleClick(tile.letter);
-                  else alert("You are out of the board!");
+                  else swal("You are out of the board!");
                 }
               }}
               key={index}

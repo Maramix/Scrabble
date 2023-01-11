@@ -1,0 +1,471 @@
+{
+  "savedGames": [
+    {
+      "gameState": {
+        "turn": 8,
+        "round": 4,
+        "isPlayerOneTurn": false,
+        "currentScore": 0,
+        "scorePlayerOne": 3,
+        "scorePlayerTwo": 0
+      },
+      "boardCoordinates": [
+        [
+          "TWS",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "TWS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "TWS"
+        ],
+        [
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "DWS",
+          ""
+        ],
+        [
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          ""
+        ],
+        [
+          "DLS",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "DLS"
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          ""
+        ],
+        [
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          ""
+        ],
+        [
+          "TWS",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "n",
+          "d",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "TWS"
+        ],
+        [
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          ""
+        ],
+        [
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          ""
+        ],
+        [
+          "",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          ""
+        ],
+        [
+          "DLS",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "DLS"
+        ],
+        [
+          "",
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "DWS",
+          "",
+          ""
+        ],
+        [
+          "",
+          "DWS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "TLS",
+          "",
+          "",
+          "",
+          "DWS",
+          ""
+        ],
+        [
+          "TWS",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "",
+          "TWS",
+          "",
+          "",
+          "",
+          "DLS",
+          "",
+          "",
+          "TWS"
+        ]
+      ],
+      "availableLetters": [
+        {
+          "letter": "r",
+          "points": 1
+        },
+        {
+          "letter": "n",
+          "points": 1
+        },
+        {
+          "letter": "ę",
+          "points": 7
+        },
+        {
+          "letter": "g",
+          "points": 3
+        },
+        {
+          "letter": "ż",
+          "points": 5
+        },
+        {
+          "letter": "f",
+          "points": 5
+        },
+        {
+          "letter": "i",
+          "points": 1
+        },
+        {
+          "letter": "ł",
+          "points": 3
+        },
+        {
+          "letter": "i",
+          "points": 1
+        },
+        {
+          "letter": "w",
+          "points": 1
+        },
+        {
+          "letter": "r",
+          "points": 1
+        },
+        {
+          "letter": "g",
+          "points": 3
+        },
+        {
+          "letter": "d",
+          "points": 2
+        },
+        {
+          "letter": "h",
+          "points": 3
+        },
+        {
+          "letter": "o",
+          "points": 1
+        },
+        {
+          "letter": "u",
+          "points": 3
+        },
+        {
+          "letter": "p",
+          "points": 2
+        },
+        {
+          "letter": "o",
+          "points": 1
+        },
+        {
+          "letter": "i",
+          "points": 1
+        },
+        {
+          "letter": "a",
+          "points": 1
+        },
+        {
+          "letter": "n",
+          "points": 1
+        },
+        {
+          "letter": "i",
+          "points": 1
+        },
+        {
+          "letter": "c",
+          "points": 2
+        },
+        {
+          "letter": "z",
+          "points": 1
+        },
+        {
+          "letter": "o",
+          "points": 1
+        },
+        {
+          "letter": "ł",
+          "points": 3
+        },
+        {
+          "letter": "c",
+          "points": 2
+        },
+        {
+          "letter": "a",
+          "points": 1
+        },
+        {
+          "letter": "ń",
+          "points": 7
+        },
+        {
+          "letter": "w",
+          "points": 1
+        },
+        {
+          "letter": "l",
+          "points": 2
+        },
+        {
+          "letter": "t",
+          "points": 2
+        },
+        {
+          "letter": "h",
+          "points": 3
+        },
+        {
+          "letter": "w",
+          "points": 1
+        },
+        {
+          "letter": "l",
+          "points": 2
+        },
+        {
+          "letter": "e",
+          "points": 1
+        },
+        {
+          "letter": "i",
+          "points": 1
+        },
+        {
+          "letter": "r",
+          "points": 1
+        },
+        {
+          "letter": "w",
+          "points": 1
+        },
+        {
+          "letter": "s",
+          "points": 1
+        },
+        {
+          "letter": "m",
+          "points": 2
+        },
+        {
+          "letter": "e",
+          "points": 1
+        },
+        {
+          "letter": "t",
+          "points": 2
+        },
+        {
+          "letter": "e",
+          "points": 1
+        },
+        {
+          "letter": "j",
+          "points": 3
+        },
+        {
+          "letter": "i",
+          "points": 1
+        },
+        {
+          "letter": "s",
+          "points": 1
+        },
+        {
+          "letter": "ć",
+          "points": 6
+        },
+        {
+          "letter": "  ",
+          "points": 0
+        }
+      ],
+      "language": "polish",
+      "id": 1
+    }
+  ]
+}

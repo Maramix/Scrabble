@@ -3,7 +3,7 @@ import allLetters from "./Data/letterdb";
 import Board from "./board";
 import GameBar from "./GameBar";
 import Game from "./Game";
-import { boardValues } from "./utility";
+import { boardValues, toggleVisibilityByClassName } from "./utility";
 
 const Multiplayer = ({ language }) => {
   const [boardCoordinates, setBoardCoordinates] = useState(boardValues());
@@ -25,6 +25,19 @@ const Multiplayer = ({ language }) => {
 
   return (
     <div className="game-container">
+      <div className="handover-container">
+        <div className="handover-box">
+          <p>
+            Hand the device over to player{" "}
+            {gameState.isPlayerOneTurn ? "One" : "Two"}
+          </p>
+          <button
+            onClick={() => toggleVisibilityByClassName("handover-container")}
+          >
+            Ok!
+          </button>
+        </div>
+      </div>
       <GameBar
         availableLetters={availableLetters}
         gameState={gameState}
@@ -41,6 +54,7 @@ const Multiplayer = ({ language }) => {
         word={word}
       />
       <Game
+        language={language}
         boardCoordinates={boardCoordinates}
         setBoardCoordinates={setBoardCoordinates}
         availableLetters={availableLetters}

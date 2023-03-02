@@ -5,7 +5,7 @@ import GameBar from "./GameBar";
 import Game from "./Game";
 import { boardValues, toggleVisibilityByClassName } from "./utility";
 
-const Multiplayer = ({ language }) => {
+const Multiplayer = ({ language, setLanguage }) => {
   const [boardCoordinates, setBoardCoordinates] = useState(boardValues());
   const [availableLetters, setAvailableLetters] = useState(
     allLetters(language)
@@ -55,6 +55,7 @@ const Multiplayer = ({ language }) => {
       />
       <Game
         language={language}
+        setLanguage={setLanguage}
         boardCoordinates={boardCoordinates}
         setBoardCoordinates={setBoardCoordinates}
         availableLetters={availableLetters}

@@ -59,12 +59,12 @@ export const checkForExtraWord = (boardCoordinates, origin, direction) => {
     var x = origin[0];
     var y = origin[1];
     let word = [boardCoordinates[x][y]];
-    console.log(origin, boardCoordinates[x][y]);
+    // console.log(origin, boardCoordinates[x][y]);
     switch (direction) {
       case "horizontally":
         while (isOccupied(boardCoordinates, [x + 1, y])) {
           word.push(boardCoordinates[x][y]);
-          console.log(word, x, boardCoordinates[x][y]);
+          // console.log(word, x, boardCoordinates[x][y]);
           x++;
         }
         // while (isOccupied(boardCoordinates, [x, y])){
@@ -73,7 +73,7 @@ export const checkForExtraWord = (boardCoordinates, origin, direction) => {
         // x--;}
         break;
       default:
-        console.log("no letter added");
+      // console.log("no letter added");
     }
   }
 };
@@ -88,19 +88,47 @@ export const saveGame = (
   gameState,
   boardCoordinates,
   availableLetters,
+  playerOneLetters,
+  playerTwoLetters,
   language
 ) => {
   const gameSave = {
     gameState,
     boardCoordinates,
     availableLetters,
+    playerOneLetters,
+    playerTwoLetters,
     language,
   };
   fetch(savedGamesUrl + "/1", {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(gameSave),
-  }).then(() => console.log("game saved"));
+  })
+    .then(() => console.log("game saved"))
+    .catch((err) => console.log(err, "saving error"));
 };
 
-export const loadGame = () => {};
+export const loadGame = (
+  savedGamesUrl,
+  setGameState,
+  setBoardCoordinates,
+  setAvailableLetters,
+  setPlayerOneLetters,
+  setPlayerTwoLetters,
+  setLanguage
+) => {
+  fetch(savedGamesUrl)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {
+      setGameState(data[0].gameState);
+      setBoardCoordinates(data[0].boardCoordinates);
+      setAvailableLetters(data[0].availableLetters);
+      setPlayerOneLetters(data[0].playerOneLetters);
+      setPlayerTwoLetters(data[0].playerTwoLetters);
+      setLanguage(data[0].language);
+    })
+    .then(() => console.log("game loaded"));
+};

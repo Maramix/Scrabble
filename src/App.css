@@ -265,3 +265,7 @@ border-radius: 1rem;
 .visible{
     display: flex;
 }
+
+.floating{
+    background-color: orange;
+}

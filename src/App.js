@@ -27,6 +27,7 @@ function App() {
               <Multiplayer
                 className="multiplier-container"
                 language={language}
+                setLanguage={setLanguage}
               />
             ) : (
               <div className="language-selection">

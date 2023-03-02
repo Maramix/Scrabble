@@ -9,6 +9,7 @@ import {
   isOccupied,
   toggleVisibilityByClassName,
   saveGame,
+  loadGame,
 } from "./utility";
 import swal from "sweetalert";
 
@@ -28,6 +29,7 @@ const Game = ({
   setWordMultiplier,
   word,
   setWord,
+  setLanguage,
 }) => {
   const savedGamesUrl = "http://localhost:8000/savedGames";
   const [isLoading, setIsLoading] = useState(false);
@@ -133,7 +135,7 @@ const Game = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!isOccupied(boardCoordinates, [7, 7]))
+    if (!isOccupied(boardCoordinates, [7, 7]) && word.length > 0)
       swal("First word must go through the center field");
     else {
       setTempCoordinates(deepClone(boardCoordinates));
@@ -158,6 +160,8 @@ const Game = ({
           gameState,
           boardCoordinates,
           availableLetters,
+          playerOneLetters,
+          playerTwoLetters,
           language
         );
         setGameState((gameState) => {
@@ -221,9 +225,25 @@ const Game = ({
             handleLettersChange(e);
           }}
         >
-          {String.fromCharCode(8693)}
+          {"🗘"}
         </button>
       )}
+      <button
+        className="button"
+        onClick={() =>
+          loadGame(
+            savedGamesUrl,
+            setGameState,
+            setBoardCoordinates,
+            setAvailableLetters,
+            setPlayerOneLetters,
+            setPlayerTwoLetters,
+            setLanguage
+          )
+        }
+      >
+        Load last game
+      </button>
     </div>
   );
 };
